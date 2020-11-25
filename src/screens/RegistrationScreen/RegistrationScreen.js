@@ -63,6 +63,7 @@ export default function RegistrationScreen({ navigation }) {
           value={fullName}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
+          textContentType={'oneTimeCode'}
         />
         <TextInput
           style={styles.input}
@@ -72,6 +73,7 @@ export default function RegistrationScreen({ navigation }) {
           value={email}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
+          textContentType={'oneTimeCode'}
         />
         <TextInput
           style={styles.input}
@@ -80,8 +82,10 @@ export default function RegistrationScreen({ navigation }) {
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
           value={password}
+          blurOnSubmit={false}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
+          textContentType={'oneTimeCode'}
         />
         <TextInput
           style={styles.input}
@@ -89,9 +93,11 @@ export default function RegistrationScreen({ navigation }) {
           secureTextEntry
           placeholder="Confirm Password"
           onChangeText={(text) => setConfirmPassword(text)}
+          blurOnSubmit={false}
           value={confirmPassword}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
+          textContentType={'oneTimeCode'}
         />
         <TouchableOpacity
           style={styles.button}
