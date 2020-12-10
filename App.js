@@ -13,6 +13,7 @@ import {
 } from "./src/screens";
 
 import {
+  MainStackNavigator,
   MatchesStackNavigator,
   SettingsStackNavigator,
 } from "./src/navigation/StackNavigator";
@@ -114,12 +115,12 @@ export default function App() {
           <>
             <Tab.Screen
               name="Login"
-              component={LoginScreen}
+              component={MainStackNavigator}
               options={{ tabBarVisible: false }}
             />
             <Tab.Screen
               name="Registration"
-              component={RegistrationScreen}
+              component={MainStackNavigator}
               options={{ tabBarVisible: false }}
             />
           </>

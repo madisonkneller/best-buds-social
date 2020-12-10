@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { MatchesScreen, SettingsScreen, SingleChatRoom, SetLocationScreen } from "../screens/index";
+import { MatchesScreen, SettingsScreen, SingleChatRoom, SetLocationScreen, LoginScreen, RegistrationScreen } from "../screens/index";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
@@ -13,6 +13,18 @@ const screenOptionStyle = {
   headerBackTitle: "Back",
 };
 
+export function MainStackNavigator(){
+  return(
+    <>
+    <NavigationContainer independent={true}>
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Registration" component={RegistrationScreen} />
+    </Stack.Navigator>
+    </NavigationContainer>
+    </>
+  )
+}
 
 export function MatchesStackNavigator() {
   //"SingChat" is nested inside "Matches", so can navigate from "Matches" to "SingleChatRoom"
