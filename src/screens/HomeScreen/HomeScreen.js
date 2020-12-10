@@ -123,6 +123,7 @@ export default function HomeScreen() {
       );
       const createChat = firebase.firestore().collection("ChatRooms");
       createChat.add({
+        name: user[index].fullName,
         Chats: [],
         Users: [currentUser.uid, user[index].id],
       });
