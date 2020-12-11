@@ -22,9 +22,6 @@ const colors = {
   gray: "#777777",
   white: "#ffffff",
   black: "#000000",
-  gray: "#DCDCDC",
-  lightRed: "#ffb3b3",
-  lightGreen: "#b3ffb3",
 };
 
 const stackSize = 1;
@@ -95,9 +92,26 @@ export default function HomeScreen() {
         id: user[index].id,
         match: true,
       });
-
     createChatRoom();
   };
+
+  const currentUserDocFunc = async () => {
+    const currentUserDoc = await firebase
+      .firestore()
+      .collection("Users")
+      .doc(currentUser.uid)
+      .get()
+      .onSnapshot((snapshot) => {
+        console.log("snapshot", snapshot.data());
+      });
+    const getCurrentUserName = await currentUserDoc.fullName.join();
+    return getCurrentUserName;
+  };
+
+  const currentUserName = currentUserDocFunc();
+  console.log("currentUserName", currentUserName);
+
+  // console.log("WHO AM I??", currentUser);
 
   async function createChatRoom() {
     const snapshot = await firebase
@@ -121,12 +135,31 @@ export default function HomeScreen() {
         ],
         { cancelable: false }
       );
+
+      //adding name query
+      // 	const currentUserDocFunc = async () => {
+      // 		const currentUserDoc = await firebase
+      // 			.firestore()
+      // 			.collection("Users")
+      // 			.doc(currentUser.uid)
+      // 			.get()
+      // 			.onSnapshot((snapshot) => {
+      //         console.log('snapshot', snapshot.data())
+      //       })
+      //     const getCurrentUserName = await currentUserDoc.fullName.join();
+      //     return getCurrentUserName
+      //   };
+      //  const currentUserName = currentUserDocFunc()
+      // console.log("WHOS CURRENT USER??", currentUserName);
+
       const createChat = firebase.firestore().collection("ChatRooms");
       createChat.add({
+        // otherUserName: user[index].fullName,
+        // currentUserName: currentUser.fullName,
+        names: `${user[index].fullName} & ${currentUserName}`,
         Chats: [],
         Users: [currentUser.uid, user[index].id],
       });
-
       console.log("true");
     }
   }
@@ -138,28 +171,22 @@ export default function HomeScreen() {
 
   const onTopSwipe = () => {
     transitionRef.current.animateNextTransition();
-    setIndex(index + (1 % user.length));
+    setIndex(index + 1);
   };
 
   useEffect(() => {
     return users.onSnapshot((querySnapshot) => {
       const userList = [];
       querySnapshot.forEach((doc) => {
-        const {
-          fullName,
-          userBio,
-          image,
-          // dogData
-        } = doc.data();
+        const { fullName, userBio, image } = doc.data();
         userList.push({
           id: doc.id,
           fullName,
           userBio,
           image,
-          // dogData,
         });
       });
-      console.log("userList", userList);
+
       setUser(userList);
       setLoading(false);
     });
@@ -176,128 +203,102 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.titlecontainer}>
-        <Text style={styles.apptext}>Best Buds Social</Text>
-      </View> */}
-
       {loading ? (
-        <View style={styles.nonmainpage}>
-          <Text style={styles.endtexttitle}>Loading</Text>
-        </View>
-      ) : end ? (
-        <View style={styles.nonmainpage}>
-          <Image
-            source={require("../../../assets/endOfMatchesDog.png")}
-            style={{
-              height: "10%",
-              width: "30%",
-              resizeMode: "stretch",
-              margin: 15,
-              alignSelf: "center",
-            }}
-          />
-          <Text style={styles.endtexttitle}>You've reached the end!</Text>
-          <Text style={styles.endtext}>
-            Check back later for new people to match with!
+        <View>
+          <Text style={{ justifyContent: "center", alignItems: "center" }}>
+            Loading
           </Text>
         </View>
+      ) : end ? (
+        <View>
+          <Text>End of Matches</Text>
+        </View>
       ) : (
-        <>
-          <View style={styles.swiperContainer}>
-            <Swiper
-              ref={swiperRef}
-              cards={user}
-              cardIndex={index}
-              renderCard={(card) => {
-                return (
-                  <View style={styles.card}>
-                    <Image
-                      source={{ uri: card.image }}
-                      style={styles.cardImage}
-                    />
-                    <Transitioning.View
-                      ref={transitionRef}
-                      transition={transition}
-                      style={styles.bottomContainerMeta}
-                    >
-                      <CardDetails index={index} />
-                    </Transitioning.View>
-                    {/* <Text
-                      style={[styles.text, styles.heading]}
-                      numberOfLines={2}
-                    >
-                      {user[index].fullName}
-                    </Text> */}
-                  </View>
-                );
-              }}
-              infinite={false}
-              backgroundColor={"transparent"}
-              onSwiped={onSwiped}
-              onSwipedLeft={onSwipedLeft}
-              onSwipedRight={onSwipedRight}
-              cardVerticalMargin={50}
-              stackSize={stackSize}
-              stackScale={10}
-              stackSeparation={14}
-              animateOverlayLabelsOpacity
-              animateCardOpacity
-              onTopSwipe={onTopSwipe}
-              onSwipedAll={() => {
-                console.log("in onSwipedAll");
-                reachedEnd(true);
-              }}
-              disableBottomSwipe
-              overlayLabels={{
-                left: {
-                  title: "NOPE",
-                  style: {
-                    label: {
-                      backgroundColor: colors.lightRed,
-                      borderColor: colors.lightRed,
-                      color: colors.white,
-                      borderWidth: 1,
-                      fontSize: 24,
-                    },
-                    wrapper: {
-                      flexDirection: "column",
-                      alignItems: "flex-end",
-                      justifyContent: "flex-start",
-                      marginTop: 20,
-                      marginLeft: -20,
-                    },
+        <View style={styles.swiperContainer}>
+          <Swiper
+            ref={swiperRef}
+            cards={user}
+            cardIndex={index}
+            renderCard={(card) => {
+              return (
+                <View style={styles.card}>
+                  <Image
+                    source={{ uri: card.image }}
+                    style={styles.cardImage}
+                  />
+                  <Text style={[styles.text, styles.heading]} numberOfLines={2}>
+                    {user[index].fullName}
+                  </Text>
+                </View>
+              );
+            }}
+            infinite={false}
+            backgroundColor={"transparent"}
+            onSwiped={onSwiped}
+            onSwipedLeft={onSwipedLeft}
+            onSwipedRight={onSwipedRight}
+            cardVerticalMargin={50}
+            stackSize={stackSize}
+            stackScale={10}
+            stackSeparation={14}
+            animateOverlayLabelsOpacity
+            animateCardOpacity
+            onTopSwipe={onTopSwipe}
+            onSwipedAll={() => {
+              console.log("in onSwipedAll");
+              reachedEnd(true);
+            }}
+            disableBottomSwipe
+            overlayLabels={{
+              left: {
+                title: "NOPE",
+                style: {
+                  label: {
+                    backgroundColor: colors.red,
+                    borderColor: colors.red,
+                    color: colors.white,
+                    borderWidth: 1,
+                    fontSize: 24,
+                  },
+                  wrapper: {
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    justifyContent: "flex-start",
+                    marginTop: 20,
+                    marginLeft: -20,
                   },
                 },
-                right: {
-                  title: "LIKE",
-                  style: {
-                    label: {
-                      backgroundColor: colors.lightGreen,
-                      borderColor: colors.lightGreen,
-                      color: colors.white,
-                      borderWidth: 1,
-                      fontSize: 24,
-                    },
-                    wrapper: {
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-start",
-                      marginTop: 20,
-                      marginLeft: 20,
-                    },
+              },
+              right: {
+                title: "LIKE",
+                style: {
+                  label: {
+                    backgroundColor: colors.blue,
+                    borderColor: colors.blue,
+                    color: colors.white,
+                    borderWidth: 1,
+                    fontSize: 24,
+                  },
+                  wrapper: {
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                    marginTop: 20,
+                    marginLeft: 20,
                   },
                 },
-              }}
-            />
-          </View>
+              },
+            }}
+          />
+
           <View>
-            {/* <Transitioning.View
+            <Transitioning.View
               ref={transitionRef}
               transition={transition}
               style={styles.bottomContainerMeta}
             >
               <CardDetails index={index} />
-            </Transitioning.View> */}
+            </Transitioning.View>
             <View style={styles.bottomContainerButtons}>
               <MaterialCommunityIcons.Button
                 name="arrow-left"
@@ -305,7 +306,7 @@ export default function HomeScreen() {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 activeOpacity={0.3}
-                color={colors.white}
+                color={colors.red}
                 onPress={() => swiperRef.current.swipeLeft()}
               />
               <MaterialCommunityIcons.Button
@@ -314,12 +315,12 @@ export default function HomeScreen() {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 activeOpacity={0.3}
-                color={colors.white}
+                color={colors.blue}
                 onPress={() => swiperRef.current.swipeRight()}
               />
             </View>
           </View>
-        </>
+        </View>
       )}
     </SafeAreaView>
   );
