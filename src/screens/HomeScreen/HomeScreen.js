@@ -74,6 +74,7 @@ export default function HomeScreen({ navigation }) {
           return doc.data();
         });
       //selects fullName, seenUsers and location fields from the doc
+      console.log("in first useEffect");
       const getCurrentUserName = await userDoc.fullName;
       const getSeenUsers = await userDoc.seenUsers;
       const getZipCode = await userDoc.location;
@@ -155,9 +156,11 @@ export default function HomeScreen({ navigation }) {
       });
 
     if (index === user.length - 1) {
+      console.log("in reached end");
       reachedEnd(true);
-    } else {
-      setIndex((index + 1) % user.length);
+    } else if (!end) {
+      console.log("in else if statement");
+      setIndex(index + 1);
       transitionRef.current.animateNextTransition();
     }
   };
@@ -218,7 +221,10 @@ export default function HomeScreen({ navigation }) {
       reachedEnd(true);
       setLoading(false);
     } else {
-      reachedEnd(false);
+      if (index === 0) {
+        console.log("in useEffect");
+        reachedEnd(false);
+      }
       setUser(zipCodeFinalUserList);
     }
   }, [finalUserArray]);
@@ -272,6 +278,7 @@ export default function HomeScreen({ navigation }) {
               cards={user}
               cardIndex={index}
               renderCard={(card) => {
+                console.log("in renderCard", end);
                 return (
                   <View style={styles.card}>
                     <Image
