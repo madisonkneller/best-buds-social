@@ -1,4 +1,3 @@
-/* function to set your location here */
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native";
@@ -45,16 +44,6 @@ export default function SetLocationScreen() {
         .set({ location: zipCode }, { merge: true });
     })();
 	}, [zipCode]);
-
-	      // firebase
-        // .firestore()
-        // .collection("users")
-        // .doc(currentUser.uid)
-        // .set({ location: place.postalCode }, { merge: true });
-
-  console.log("LOCATION", location);
-  console.log("PLACE", place);
-  console.log("ZIPCODE", zipCode);
 
   let text = "Loading location info...";
   if (errorMsg) {

@@ -4,24 +4,12 @@ import { firebase } from "./src/firebase/config";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
-  LoginScreen,
-  HomeScreen,
-  RegistrationScreen,
-  SettingsScreen,
-  MatchesScreen,
-  CurrentUserScreen,
-  SingleMatchProfile,
-} from "./src/screens";
-
-import {
   HomeStackNavigator,
   MainStackNavigator,
   MatchesStackNavigator,
   SettingsStackNavigator,
-  RegistrationScreenNavigator,
-  CurrentUserNavigator,
+  CurrentUserNavigator
 } from "./src/navigation/StackNavigator";
-
 import { Text, View } from "react-native";
 import { decode, encode } from "base-64";
 import { FontAwesome } from "@expo/vector-icons";
@@ -44,9 +32,7 @@ export default function App() {
   useEffect(() => {
     const usersRef = firebase.firestore().collection("users");
     firebase.auth().onAuthStateChanged((user) => {
-      console.log("onauthstate triggered");
       if (user) {
-        console.log("user", user);
         usersRef
           .doc(user.uid)
           .get()
@@ -56,7 +42,6 @@ export default function App() {
             setUser(userData);
           })
           .catch((error) => {
-            // setLoading(false);
             alert(error);
           });
       } else {
@@ -91,7 +76,6 @@ export default function App() {
             <>
               <Tab.Screen
                 name="Home"
-                // component={MatchesStackNavigator}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <FontAwesome

@@ -3,7 +3,6 @@ import "@firebase/auth";
 import "@firebase/firestore";
 
 const firebaseConfig = {
-  // apiKey: "AIzaSyBFAAEmvCe6VjIjR4FeMUnWZqCZVn5yUaE",
   apiKey: "AIzaSyBkSSX-BO-J232K4bSglmi_G2g7PZtPqR0",
   authDomain: "best-buds-social.firebaseapp.com",
   databaseURL: "https://best-buds-social.firebaseio.com",
@@ -19,4 +18,4 @@ if (!firebase.apps.length) {
 
 export { firebase };
 
-// This would typically be a gitignore file and not be publicly available on Github. Firebase has own database security rules. 
+// This would typically be a gitignore file and not be publicly available on Github. Firebase has own database security rules.

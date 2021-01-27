@@ -1,5 +1,3 @@
-import { exp } from "react-native-reanimated";
-
 export { default as LoginScreen } from "./LoginScreen/LoginScreen";
 
 export { default as HomeScreen } from "./HomeScreen/HomeScreen";

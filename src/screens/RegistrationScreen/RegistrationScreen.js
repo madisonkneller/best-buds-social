@@ -4,14 +4,11 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Button,
-  Alert,
+  View
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "./styles";
 import { firebase } from "../../firebase/config";
-// import { Dropdown } from "react-native-material-dropdown-v2-fixed";
 import DropDownPicker from "react-native-dropdown-picker";
 import * as ImagePicker from "expo-image-picker";
 import "firebase/storage";
@@ -22,9 +19,7 @@ export default function RegistrationScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  //Newly added userBio input
   const [userBio, setUserBio] = useState("");
-  //Newly added dog information
   const [dogName, setDogName] = useState("");
   const [dogSize, setDogSize] = useState("");
   const [dogGender, setDogGender] = useState("");
@@ -66,7 +61,6 @@ export default function RegistrationScreen({ navigation }) {
           id: uid,
           email,
           fullName,
-          //Newly add field
           userBio,
           image,
           location: "11214",
@@ -85,32 +79,7 @@ export default function RegistrationScreen({ navigation }) {
         usersRef
           .doc(uid)
           .set(data)
-          // .then(() => {
-          //   navigation.navigate(
-          //     "Home"
-          //     // , { user: data }
-          //   );
-          // })
           .then(() => {
-            // Alert.alert(
-            //   "Please login now!",
-            //   [
-            //     {
-            //       text: "OK",
-            //     },
-            //   ],
-            //   { cancelable: false }
-            // );
-
-            // firebase
-            //   .auth()
-            //   .signOut()
-            //   // .then((response) => {
-            //   //   navigation.navigate("Login");
-            //   // })
-            //   .catch((error) => {
-            //     alert(error);
-            //   });
             navigation.navigate("Login");
           })
           .catch((error) => {
@@ -275,7 +244,6 @@ export default function RegistrationScreen({ navigation }) {
             </View>
           </TouchableOpacity>
           <TextInput
-            //Newly Added UserBioSection
             style={styles.largeinput}
             placeholder="Tell us about you & your dog here...you can include your favorite places to walk and/or anything special about your best bud :)"
             placeholderTextColor="#aaaaaa"
@@ -287,7 +255,6 @@ export default function RegistrationScreen({ navigation }) {
             textContentType={"oneTimeCode"}
           />
           <TextInput
-            //Newly Added Dog Section - Name
             style={styles.input}
             placeholder="Dog Name"
             placeholderTextColor="#aaaaaa"
@@ -298,7 +265,6 @@ export default function RegistrationScreen({ navigation }) {
             textContentType={"oneTimeCode"}
           />
           <TextInput
-            //Newly Added Dog Section - Name
             style={styles.input}
             placeholder="Dog Breed"
             placeholderTextColor="#aaaaaa"
@@ -310,7 +276,6 @@ export default function RegistrationScreen({ navigation }) {
           />
 
           <DropDownPicker
-            //Newly Added Dog Section - Gender
             placeholder="Choose Dog Gender"
             items={[
               { label: "Female", value: "Female" },
@@ -321,7 +286,6 @@ export default function RegistrationScreen({ navigation }) {
             zIndex={5000}
           />
           <DropDownPicker
-            //Newly Added Dog Section - Size
             placeholder="Choose Dog Size"
             items={[
               { label: "Extra Small", value: "Extra Small" },
@@ -335,7 +299,6 @@ export default function RegistrationScreen({ navigation }) {
             zIndex={4000}
           />
           <DropDownPicker
-            //Newly Added Dog Section - Temperament
             placeholder="Choose Dog Temperament"
             items={[
               { label: "Calm", value: "Calm" },

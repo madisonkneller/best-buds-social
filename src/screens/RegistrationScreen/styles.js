@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  title: {},
+
   logo: {
     flex: 1,
     height: 120,
@@ -14,6 +14,7 @@ export default StyleSheet.create({
     marginTop: 30,
     margin: 20,
   },
+
   input: {
     height: 48,
     borderRadius: 5,
@@ -25,6 +26,7 @@ export default StyleSheet.create({
     marginRight: 30,
     paddingLeft: 16,
   },
+
   largeinput: {
     height: 100,
     borderRadius: 5,
@@ -36,6 +38,7 @@ export default StyleSheet.create({
     marginRight: 30,
     paddingLeft: 16,
   },
+
   button: {
     backgroundColor: "#5271FF",
     marginLeft: 30,
@@ -46,25 +49,30 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   buttonTitle: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },
+
   footerView: {
     flex: 1,
     alignItems: "center",
     marginTop: 20,
   },
+
   footerText: {
     fontSize: 16,
     color: "#2e2e2d",
   },
+
   footerLink: {
     color: "#5271FF",
     fontWeight: "bold",
     fontSize: 16,
   },
+
   dropdown: {
     flex: 1,
     backgroundColor: "white",
@@ -77,5 +85,5 @@ export default StyleSheet.create({
     height: 48,
     borderRadius: 5,
     fontSize: 13,
-  },
+  }
 });

@@ -6,6 +6,7 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#d8ecf3",
   },
+
   input: {
     height: 48,
     width: 200,
@@ -18,6 +19,7 @@ export default StyleSheet.create({
     marginRight: 30,
     paddingLeft: 16,
   },
+
   largeinput: {
     height: 100,
     borderRadius: 5,
@@ -29,6 +31,7 @@ export default StyleSheet.create({
     marginRight: 30,
     paddingLeft: 16,
   },
+
   button: {
     backgroundColor: "#788eec",
     marginLeft: 30,
@@ -39,25 +42,30 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   buttonTitle: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },
+
   footerView: {
     flex: 1,
     alignItems: "center",
     marginTop: 20,
   },
+
   footerText: {
     fontSize: 16,
     color: "#2e2e2d",
   },
+
   footerLink: {
     color: "#788eec",
     fontWeight: "bold",
     fontSize: 16,
   },
+
   dropdown: {
     backgroundColor: "white",
     alignContent: "center",
@@ -69,5 +77,5 @@ export default StyleSheet.create({
     height: 48,
     borderRadius: 5,
     fontSize: 13,
-  },
+  }
 });

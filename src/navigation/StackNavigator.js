@@ -33,18 +33,7 @@ export function MainStackNavigator() {
   );
 }
 
-// export function RegistrationScreenNavigator() {
-//   return (
-//     <>
-//       <Stack.Navigator screenOptions={screenOptionStyle}>
-//         <Stack.Screen name="Registration" component={RegistrationScreen} />
-//       </Stack.Navigator>
-//     </>
-//   );
-// }
-
 export function CurrentUserNavigator() {
-  // console.log("current user");
   return (
     <>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -56,7 +45,6 @@ export function CurrentUserNavigator() {
 }
 
 export function SingleMatchNavigator() {
-  // console.log("current user");
   return (
     <>
       <Stack.Navigator screenOptions={screenOptionStyle}>
@@ -78,7 +66,7 @@ export function HomeStackNavigator() {
 }
 
 export function MatchesStackNavigator() {
-  //"SingChat" is nested inside "Matches", so can navigate from "Matches" to "SingleChatRoom"
+  //"SingleChat" is nested inside "Matches", so can navigate from "Matches" to "SingleChatRoom"
   return (
     <>
       <Stack.Navigator screenOptions={screenOptionStyle}>

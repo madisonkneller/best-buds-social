@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
   Alert,
-  FlatList,
 } from "react-native";
-import { List, Divider } from "react-native-paper";
 import { firebase } from "../../firebase/config";
 import styles from "./styles";
 import { FontAwesome } from "@expo/vector-icons";
@@ -55,9 +53,6 @@ export default function SettingsScreen({ navigation }) {
     firebase
       .auth()
       .signOut()
-      // .then((response) => {
-      //   navigation.navigate("Login");
-      // })
       .catch((error) => {
         alert(error);
       });
@@ -90,8 +85,6 @@ export default function SettingsScreen({ navigation }) {
         backgroundColor: "#d8ecf3",
       }}
     >
-      {/* <FlatList data={SettingsData}
-    renderItem={Item}> */}
       <FontAwesome
         name="map-marker"
         size={20}
@@ -158,7 +151,6 @@ export default function SettingsScreen({ navigation }) {
           Log Out
         </Text>
       </TouchableOpacity>
-      {/* </FlatList> */}
     </View>
   );
 }

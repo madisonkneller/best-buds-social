@@ -28,6 +28,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Best Buds Social is a mobile app that works on phones compatible with Apple's iOS mobile operating system. It is a social app that connects New York City dog owners with other dog owners looking for a walking companion. To ensure dog walking compatibility, users have access to a swipe matching feature based on location, other dog owners' public profiles, and a chat feature where they can get to know one another.",
+    "githubUrl": "https://github.com/best-buds-social/best-buds-social"
   }
 }

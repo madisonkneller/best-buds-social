@@ -12,6 +12,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#d8ecf3",
+    alignContent: "center",
   },
 
   text: {
@@ -86,10 +87,10 @@ export default StyleSheet.create({
   },
 
   userBio: {
-    alignSelf: "flex-start",
+    alignSelf: "center",
     alignItems: "flex-start",
     marginTop: 16,
-    marginRight: 30,
+    marginRight: 42,
     marginLeft: 42,
     marginBottom: 16,
     paddingLeft: 50,
@@ -101,11 +102,8 @@ export default StyleSheet.create({
   },
 
   dogData: {
-    alignSelf: "flex-start",
-    alignItems: "flex-start",
+    alignSelf: "center",
     marginTop: 16,
-    marginRight: 20,
-    marginLeft: 62,
     marginBottom: 16,
     paddingLeft: 50,
     paddingRight: 50,

@@ -15,11 +15,13 @@ export const chatStyles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
   },
+
   listTitle: {
     fontSize: 22,
     fontFamily: "System",
     color: "#0b2f64",
   },
+
   listDescription: {
     fontSize: 16,
     fontFamily: "System",

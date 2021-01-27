@@ -1,34 +1,23 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   Text,
   Image,
-  TextInput,
   ScrollView,
   View,
-  SafeAreaView,
-  FlatList,
-  Alert,
+  SafeAreaView
 } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../firebase/config";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { multiply } from "react-native-reanimated";
+import { Ionicons } from "@expo/vector-icons";
 import {
-  TouchableHighlight,
-  TouchableOpacity,
+  TouchableHighlight
 } from "react-native-gesture-handler";
-// import EditButton from "react-edit-button"
 
 export default function SingleMatchProfile({ route, navigation }) {
   const [matchUser, setMatchUser] = useState([]);
   const [dogInfo, setDogInfo] = useState([]);
-  const [index, setIndex] = React.useState(0);
-  const [loading, setLoading] = useState(true);
-  const currentUser = firebase.auth().currentUser;
 
   const userId = route.params.userID.id;
-  console.log("in singlematch", userId);
 
   useEffect(() => {
     (async () => {
@@ -46,64 +35,6 @@ export default function SingleMatchProfile({ route, navigation }) {
     })();
   }, []);
 
-  // Need a function that checks where "id" "=="
-
-  // const onAddUser = () => {
-  //   firebase
-  //     .firestore()
-  //     .collection("users")
-  //     .doc(currentUser.uid)
-  //     .collection("userLikes")
-  //     .add({
-  //       fullName: matchUser.fullName,
-  //       id: matchUser.id,
-  //       match: true,
-  //     });
-  //     Alert.alert(
-  //       `${matchUser.fullName} has been added to your likes! A chat room will automatically be generated if they add you too!`,
-  //       [
-  //         {
-  //           text: "OK",
-  //         },
-  //       ],
-  //       { cancelable: false }
-  //     )
-
-  //     createChatRoom()
-
-  //     async function createChatRoom() {
-  //       const snapshot = await firebase
-  //         .firestore()
-  //         .collection("users")
-  //         .doc(matchUser.id)
-  //         .collection("userLikes")
-  //         .where("id", "==", currentUser.uid)
-  //         .get();
-
-  //         if (snapshot.empty) {
-  //       } else {
-  //         Alert.alert(
-  //           "Congrats! It's a match!",
-  //           "Head to your matches to start chatting!",
-  //           [
-  //             {
-  //               text: "OK",
-  //             },
-  //           ],
-  //           { cancelable: false }
-  //         );
-
-  //         const createChat = firebase.firestore().collection("ChatRooms");
-  //         createChat.add({
-  //           //fields created within Chatroom collection documents
-  //           names: `${matchUser.fullName} & ${currentUser.fullName}`,
-  //           Users: [currentUser.uid, matchUser.id],
-  //         });
-  //       }
-  //     }
-
-  // };
-
   function onArrowPress() {
     return navigation.navigate("Home");
   }
@@ -116,7 +47,7 @@ export default function SingleMatchProfile({ route, navigation }) {
             <Ionicons
               name="ios-arrow-back"
               size={24}
-              colors="#EC2379"
+              color="tomato"
             ></Ionicons>
           </TouchableHighlight>
         </View>
@@ -128,26 +59,6 @@ export default function SingleMatchProfile({ route, navigation }) {
               resizeMode="cover"
             ></Image>
           </View>
-          {/* <View style={styles.chat}>
-            <TouchableOpacity>
-              <MaterialIcons
-                name="chat"
-                size={18}
-                color="#DFD8C8"
-                //onPress={() => onChatPress()}
-              ></MaterialIcons>
-            </TouchableOpacity>
-          </View> */}
-          {/* <View style={styles.active}></View> */}
-          {/* <View style={styles.add}> */}
-          {/* <Ionicons
-              name="ios-add"
-              size={48}
-              color="#DFD8C8"
-              style={{ marginTop: 6, marginLeft: 2 }}
-              onPress={() => onAddUser()}
-            ></Ionicons> */}
-          {/* </View> */}
         </View>
         <View style={styles.infoContainer}>
           <Text style={[styles.text, { fontWeight: "200", fontSize: 28 }]}>
